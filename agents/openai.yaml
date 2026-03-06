@@ -1,0 +1,4 @@
+interface:
+  display_name: "Database View Pro"
+  short_description: "Build admin workbench CRUD pages"
+  default_prompt: "Use $database-view-pro to design or refactor a CRM-style data workbench page."
