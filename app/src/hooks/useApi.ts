@@ -32,7 +32,7 @@ export function useApi() {
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || "An error occurred");
+        throw new Error(data.error || "Đã xảy ra lỗi");
       }
 
       const data = await response.json();
