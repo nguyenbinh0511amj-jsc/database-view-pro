@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI || process.env.ATLAS_URI || "";
-
-if (!MONGODB_URI) {
-  throw new Error(
-    "MONGODB_URI or ATLAS_URI must be defined in environment variables",
-  );
+function getMongoUri() {
+  return process.env.MONGODB_URI || process.env.ATLAS_URI || "";
 }
 
 interface Cached {
@@ -24,7 +20,14 @@ export async function connectDB() {
   }
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI, {
+    const uri = getMongoUri();
+    if (!uri) {
+      throw new Error(
+        "MONGODB_URI or ATLAS_URI must be defined in environment variables",
+      );
+    }
+
+    cached.promise = mongoose.connect(uri, {
       bufferCommands: false,
     });
   }
